@@ -272,18 +272,19 @@ with tab_manage:
                     format_func=lambda i: labels_e[i], key="edit_sel",
                 )
                 row_e = edf.iloc[sel_e]
+                row_idx = edf.index[sel_e]
 
                 c1, c2 = st.columns(2)
                 with c1:
-                    edit_date = st.date_input("Date", value=row_e["Date"].date(), key="edit_date")
-                    edit_dept = st.text_input("Department", value=str(row_e["Department"]), key="edit_dept")
-                    edit_type = st.text_input("Cost Type", value=str(row_e["Cost Type"]), key="edit_ctype")
+                    edit_date = st.date_input("Date", value=row_e["Date"].date(), key=f"edit_date_{row_idx}")
+                    edit_dept = st.text_input("Department", value=str(row_e["Department"]), key=f"edit_dept_{row_idx}")
+                    edit_type = st.text_input("Cost Type", value=str(row_e["Cost Type"]), key=f"edit_ctype_{row_idx}")
                 with c2:
                     edit_amount = st.number_input(
                         "Amount", value=float(row_e["Amount"]),
-                        min_value=0.0, step=0.01, format="%.2f", key="edit_amount",
+                        min_value=0.0, step=0.01, format="%.2f", key=f"edit_amount_{row_idx}",
                     )
-                    edit_supplier = st.text_input("Supplier", value=str(row_e["Supplier"]), key="edit_supplier")
+                    edit_supplier = st.text_input("Supplier", value=str(row_e["Supplier"]), key=f"edit_supplier_{row_idx}")
 
                 if st.button("Save Changes", type="primary", key="btn_edit"):
                     _update(int(row_e["_row"]), {
