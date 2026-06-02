@@ -30,7 +30,7 @@ def load_data():
     if df.empty:
         return df
     df = df[df["Date"].astype(str).str.strip() != ""]
-    df["Date"] = pd.to_datetime(df["Date"])
+    df["Date"] = pd.to_datetime(df["Date"], dayfirst=True)
     df["Amount"] = pd.to_numeric(df["Subtotal"], errors="coerce").fillna(0)
     df["Day"] = df["Date"].dt.date
     df["Month"] = df["Date"].dt.to_period("M").astype(str)
