@@ -70,7 +70,7 @@ with tab_dash:
     st.title("📊 Hotel Strela — Expenses Dashboard")
     if not df.empty:
         st.caption(
-            f"Data from {df['Date'].min().date()} to {df['Date'].max().date()} — {len(df)} transactions"
+            f"Data from {df['Date'].min().strftime('%d/%m/%Y')} to {df['Date'].max().strftime('%d/%m/%Y')} — {len(df)} transactions"
         )
 
     with st.sidebar:
@@ -265,7 +265,7 @@ with tab_manage:
                 st.info("No entries match your search.")
             else:
                 labels_e = edf.apply(
-                    lambda r: f"{r['Date'].date()} | {r['Supplier']} | {r['Amount']:,.0f}", axis=1
+                    lambda r: f"{r['Date'].strftime('%d/%m/%Y')} | {r['Supplier']} | {r['Amount']:,.0f}", axis=1
                 ).tolist()
                 sel_e = st.selectbox(
                     "Select entry", range(len(labels_e)),
@@ -320,7 +320,7 @@ with tab_manage:
                 st.info("No entries match your search.")
             else:
                 labels_d = ddf.apply(
-                    lambda r: f"{r['Date'].date()} | {r['Supplier']} | {r['Amount']:,.0f}", axis=1
+                    lambda r: f"{r['Date'].strftime('%d/%m/%Y')} | {r['Supplier']} | {r['Amount']:,.0f}", axis=1
                 ).tolist()
                 sel_d = st.selectbox(
                     "Select entry", range(len(labels_d)),
